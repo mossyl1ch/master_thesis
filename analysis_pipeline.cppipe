@@ -1,0 +1,356 @@
+CellProfiler Pipeline: http://www.cellprofiler.org
+Version:5
+DateRevision:428
+GitHash:
+ModuleCount:20
+HasImagePlaneDetails:False
+
+Images:[module_num:1|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['To begin creating your project, use the Images module to compile a list of files and/or folders that you want to analyze. You can also specify a set of rules to include only the desired files in your selected folders.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    :
+    Filter images?:Images only
+    Select the rule criteria:and (extension does isimage) (directory doesnot containregexp "[\\\\/]\\.")
+
+Metadata:[module_num:2|svn_version:'Unknown'|variable_revision_number:6|show_window:False|notes:['The Metadata module optionally allows you to extract information describing your images (i.e, metadata) which will be stored along with your measurements. This information can be contained in the file name and/or location, or in an external file.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Extract metadata?:Yes
+    Metadata data type:Text
+    Metadata types:{}
+    Extraction method count:1
+    Metadata extraction method:Extract from image file headers
+    Metadata source:File name
+    Regular expression to extract from file name:^(?P<Plate>.*)_(?P<Well>[A-P][0-9]{2})_s(?P<Site>[0-9])_w(?P<ChannelNumber>[0-9])
+    Regular expression to extract from folder name:(?P<Date>[0-9]{4}_[0-9]{2}_[0-9]{2})$
+    Extract metadata from:All images
+    Select the filtering criteria:and (file does contain "")
+    Metadata file location:Elsewhere...|
+    Match file and image metadata:[]
+    Use case insensitive matching?:No
+    Metadata file name:None
+    Does cached metadata exist?:Yes
+
+NamesAndTypes:[module_num:3|svn_version:'Unknown'|variable_revision_number:8|show_window:False|notes:['The NamesAndTypes module allows you to assign a meaningful name to each image by which other modules will refer to it.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Assign a name to:Images matching rules
+    Select the image type:Grayscale image
+    Name to assign these images:DNA
+    Match metadata:[]
+    Image set matching method:Order
+    Set intensity range from:Image metadata
+    Assignments count:3
+    Single images count:0
+    Maximum intensity:255.0
+    Process as 3D?:No
+    Relative pixel spacing in X:1.0
+    Relative pixel spacing in Y:1.0
+    Relative pixel spacing in Z:1.0
+    Select the rule criteria:and (file does contain "CD86")
+    Name to assign these images:CD86
+    Name to assign these objects:Cell
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Maximum intensity:255.0
+    Select the rule criteria:and (file does contain "TrkA")
+    Name to assign these images:TrkA
+    Name to assign these objects:Nucleus
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Maximum intensity:255.0
+    Select the rule criteria:and (file does contain "Iba1")
+    Name to assign these images:Iba1
+    Name to assign these objects:Cytoplasm
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Maximum intensity:255.0
+
+Groups:[module_num:4|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['The Groups module optionally allows you to split your list of images into image subsets (groups) which will be processed independently of each other. Examples of groupings include screening batches, microtiter plates, time-lapse movies, etc.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Do you want to group your images?:No
+    grouping metadata count:1
+    Metadata category:None
+
+IdentifyPrimaryObjects:[module_num:5|svn_version:'Unknown'|variable_revision_number:15|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:CD86
+    Name the primary objects to be identified:overall_neurons
+    Typical diameter of objects, in pixel units (Min,Max):20,500
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Shape
+    Method to draw dividing lines between clumped objects:Propagate
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Adaptive
+    Thresholding method:Minimum Cross-Entropy
+    Threshold smoothing scale:1.3488
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Three classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+IdentifyPrimaryObjects:[module_num:6|svn_version:'Unknown'|variable_revision_number:15|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:TrkA
+    Name the primary objects to be identified:trkA_neurons
+    Typical diameter of objects, in pixel units (Min,Max):15,90
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Shape
+    Method to draw dividing lines between clumped objects:Propagate
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Adaptive
+    Thresholding method:Otsu
+    Threshold smoothing scale:1.3488
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.005,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Three classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+Threshold:[module_num:7|svn_version:'Unknown'|variable_revision_number:12|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:Iba1
+    Name the output image:Iba1_Treshold
+    Threshold strategy:Adaptive
+    Thresholding method:Otsu
+    Threshold smoothing scale:1.5
+    Threshold correction factor:1
+    Lower and upper bounds on threshold:0.01,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Three classes
+    Log transform before thresholding?:Yes
+    Assign pixels in the middle intensity class to the foreground or the background?:Background
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+IdentifyPrimaryObjects:[module_num:8|svn_version:'Unknown'|variable_revision_number:15|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:Iba1_Treshold
+    Name the primary objects to be identified:macophages
+    Typical diameter of objects, in pixel units (Min,Max):10,60
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Shape
+    Method to draw dividing lines between clumped objects:Shape
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Fill holes in identified objects?:Never
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Global
+    Thresholding method:Manual
+    Threshold smoothing scale:1.3488
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.1
+    Select the measurement to threshold with:Threshold_FinalThreshold_Iba1_Treshold
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+Threshold:[module_num:9|svn_version:'Unknown'|variable_revision_number:12|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:CD86
+    Name the output image:CD86_Threshold
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Threshold smoothing scale:0.0
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.02,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Minimum Cross-Entropy
+
+MeasureColocalization:[module_num:10|svn_version:'Unknown'|variable_revision_number:5|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select images to measure:CD86_Threshold, Iba1_Treshold
+    Set threshold as percentage of maximum intensity for the images:15.0
+    Select where to measure correlation:Across entire image
+    Select objects to measure:
+    Run all metrics?:Yes
+    Calculate correlation and slope metrics?:Yes
+    Calculate the Manders coefficients?:Yes
+    Calculate the Rank Weighted Colocalization coefficients?:Yes
+    Calculate the Overlap coefficients?:Yes
+    Calculate the Manders coefficients using Costes auto threshold?:Yes
+    Method for Costes thresholding:Faster
+
+MeasureObjectNeighbors:[module_num:11|svn_version:'Unknown'|variable_revision_number:3|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to measure:trkA_neurons
+    Select neighboring objects to measure:macophages
+    Method to determine neighbors:Within a specified distance
+    Neighbor distance:5
+    Consider objects discarded for touching image border?:Yes
+    Retain the image of objects colored by numbers of neighbors?:No
+    Name the output image:ObjectNeighborCount
+    Select colormap:Blues
+    Retain the image of objects colored by percent of touching pixels?:No
+    Name the output image:PercentTouching
+    Select colormap:Oranges
+
+MaskObjects:[module_num:12|svn_version:'Unknown'|variable_revision_number:3|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to be masked:overall_neurons
+    Name the masked objects:Masked_neurons
+    Mask using a region defined by other objects or by binary image?:Objects
+    Select the masking object:trkA_neurons
+    Select the masking image:None
+    Handling of objects that are partially masked:Remove depending on overlap
+    Fraction of object that must overlap:0.5
+    Numbering of resulting objects:Renumber
+    Invert the mask?:Yes
+
+MeasureObjectNeighbors:[module_num:13|svn_version:'Unknown'|variable_revision_number:3|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to measure:Masked_neurons
+    Select neighboring objects to measure:macophages
+    Method to determine neighbors:Within a specified distance
+    Neighbor distance:5
+    Consider objects discarded for touching image border?:Yes
+    Retain the image of objects colored by numbers of neighbors?:No
+    Name the output image:ObjectNeighborCount
+    Select colormap:Blues
+    Retain the image of objects colored by percent of touching pixels?:No
+    Name the output image:PercentTouching
+    Select colormap:Oranges
+
+MeasureImageAreaOccupied:[module_num:14|svn_version:'Unknown'|variable_revision_number:5|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Measure the area occupied by:Binary Image
+    Select binary images to measure:CD86_Threshold
+    Select object sets to measure:
+
+ImageMath:[module_num:15|svn_version:'Unknown'|variable_revision_number:5|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Operation:And
+    Raise the power of the result by:1.0
+    Multiply the result by:1.0
+    Add to result:0.0
+    Set values less than 0 equal to 0?:Yes
+    Set values greater than 1 equal to 1?:Yes
+    Replace invalid values with 0?:Yes
+    Ignore the image masks?:No
+    Name the output image:CD86_pos_macrophages_area
+    Image or measurement?:Image
+    Select the first image:Iba1_Treshold
+    Multiply the first image by:1.0
+    Measurement:
+    Image or measurement?:Image
+    Select the second image:CD86_Threshold
+    Multiply the second image by:1.0
+    Measurement:
+
+MeasureImageAreaOccupied:[module_num:16|svn_version:'Unknown'|variable_revision_number:5|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Measure the area occupied by:Binary Image
+    Select binary images to measure:CD86_pos_macrophages_area
+    Select object sets to measure:
+
+MaskObjects:[module_num:17|svn_version:'Unknown'|variable_revision_number:3|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to be masked:macophages
+    Name the masked objects:CD86_pos_macrophages_total
+    Mask using a region defined by other objects or by binary image?:Image
+    Select the masking object:None
+    Select the masking image:CD86_Threshold
+    Handling of objects that are partially masked:Remove depending on overlap
+    Fraction of object that must overlap:0.005
+    Numbering of resulting objects:Renumber
+    Invert the mask?:No
+
+MeasureObjectNeighbors:[module_num:18|svn_version:'Unknown'|variable_revision_number:3|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to measure:trkA_neurons
+    Select neighboring objects to measure:CD86_pos_macrophages_total
+    Method to determine neighbors:Within a specified distance
+    Neighbor distance:5
+    Consider objects discarded for touching image border?:Yes
+    Retain the image of objects colored by numbers of neighbors?:No
+    Name the output image:ObjectNeighborCount
+    Select colormap:Blues
+    Retain the image of objects colored by percent of touching pixels?:No
+    Name the output image:PercentTouching
+    Select colormap:Oranges
+
+MeasureObjectNeighbors:[module_num:19|svn_version:'Unknown'|variable_revision_number:3|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to measure:Masked_neurons
+    Select neighboring objects to measure:CD86_pos_macrophages_total
+    Method to determine neighbors:Within a specified distance
+    Neighbor distance:5
+    Consider objects discarded for touching image border?:Yes
+    Retain the image of objects colored by numbers of neighbors?:No
+    Name the output image:ObjectNeighborCount
+    Select colormap:Blues
+    Retain the image of objects colored by percent of touching pixels?:No
+    Name the output image:PercentTouching
+    Select colormap:Oranges
+
+ExportToSpreadsheet:[module_num:20|svn_version:'Unknown'|variable_revision_number:13|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the column delimiter:Comma (",")
+    Add image metadata columns to your object data file?:Yes
+    Add image file and folder names to your object data file?:Yes
+    Select the measurements to export:Yes
+    Calculate the per-image mean values for object measurements?:Yes
+    Calculate the per-image median values for object measurements?:Yes
+    Calculate the per-image standard deviation values for object measurements?:Yes
+    Output file location:Default Output Folder|
+    Create a GenePattern GCT file?:No
+    Select source of sample row name:Metadata
+    Select the image to use as the identifier:None
+    Select the metadata to use as the identifier:None
+    Export all measurement types?:Yes
+    Press button to select measurements:overall_neurons|Children_Masked_neurons_Count,overall_neurons|Location_Center_X,overall_neurons|Location_Center_Z,overall_neurons|Location_Center_Y,overall_neurons|Number_Object_Number,Image|Threshold_FinalThreshold_overall_neurons,Image|Threshold_FinalThreshold_CD86_Threshold,Image|Threshold_FinalThreshold_Iba1_Treshold,Image|Threshold_FinalThreshold_trkA_neurons,Image|Threshold_FinalThreshold_macophages,Image|Threshold_WeightedVariance_macophages,Image|Threshold_WeightedVariance_Iba1_Treshold,Image|Threshold_WeightedVariance_overall_neurons,Image|Threshold_WeightedVariance_trkA_neurons,Image|Threshold_WeightedVariance_CD86_Threshold,Image|Threshold_SumOfEntropies_macophages,Image|Threshold_SumOfEntropies_CD86_Threshold,Image|Threshold_SumOfEntropies_Iba1_Treshold,Image|Threshold_SumOfEntropies_trkA_neurons,Image|Threshold_SumOfEntropies_overall_neurons,Image|Threshold_OrigThreshold_CD86_Threshold,Image|Threshold_OrigThreshold_overall_neurons,Image|Threshold_OrigThreshold_Iba1_Treshold,Image|Threshold_OrigThreshold_trkA_neurons,Image|Threshold_OrigThreshold_macophages,Image|Threshold_GuideThreshold_trkA_neurons,Image|Threshold_GuideThreshold_overall_neurons,Image|Threshold_GuideThreshold_Iba1_Treshold,Image|Metadata_Well,Image|Metadata_Plate,Image|Metadata_Z,Image|Metadata_ChannelName,Image|Metadata_FileLocation,Image|Metadata_SizeT,Image|Metadata_C,Image|Metadata_SizeZ,Image|Metadata_Site,Image|Metadata_SizeY,Image|Metadata_Series,Image|Metadata_Frame,Image|Metadata_SizeC,Image|Metadata_SizeX,Image|Metadata_ColorFormat,Image|Metadata_T,Image|Correlation_Manders_CD86_Threshold_Iba1_Treshold,Image|Correlation_Manders_Iba1_Treshold_CD86_Threshold,Image|Correlation_Overlap_CD86_Threshold_Iba1_Treshold,Image|Correlation_RWC_Iba1_Treshold_CD86_Threshold,Image|Correlation_RWC_CD86_Threshold_Iba1_Treshold,Image|Correlation_Slope_CD86_Threshold_Iba1_Treshold,Image|Correlation_Correlation_CD86_Threshold_Iba1_Treshold,Image|Correlation_K_CD86_Threshold_Iba1_Treshold,Image|Correlation_K_Iba1_Treshold_CD86_Threshold,Image|Correlation_Costes_Iba1_Treshold_CD86_Threshold,Image|Correlation_Costes_CD86_Threshold_Iba1_Treshold,Image|Scaling_TrkA,Image|Scaling_Iba1,Image|Scaling_CD86,Image|Series_TrkA,Image|Series_Iba1,Image|Series_CD86,Image|Count_trkA_neurons,Image|Count_CD86_pos_macrophages_total,Image|Count_macophages,Image|Count_overall_neurons,Image|Count_Masked_neurons,Image|Frame_Iba1,Image|Frame_CD86,Image|Frame_TrkA,Image|AreaOccupied_AreaOccupied_CD86_Threshold,Image|AreaOccupied_AreaOccupied_CD86_pos_macrophages_area,Image|AreaOccupied_Perimeter_CD86_pos_macrophages_area,Image|AreaOccupied_Perimeter_CD86_Threshold,Image|AreaOccupied_TotalArea_CD86_Threshold,Image|AreaOccupied_TotalArea_CD86_pos_macrophages_area,Image|Width_TrkA,Image|Width_CD86,Image|Width_Iba1,Image|FileName_Iba1,Image|FileName_CD86,Image|FileName_TrkA,Image|Height_TrkA,Image|Height_CD86,Image|Height_Iba1,macophages|Location_Center_Z,macophages|Location_Center_X,macophages|Location_Center_Y,macophages|Number_Object_Number,macophages|Children_CD86_pos_macrophages_total_Count,trkA_neurons|Number_Object_Number,trkA_neurons|Neighbors_NumberOfNeighbors_macophages_5,trkA_neurons|Neighbors_NumberOfNeighbors_CD86_pos_macrophages_total_5,trkA_neurons|Neighbors_AngleBetweenNeighbors_macophages_5,trkA_neurons|Neighbors_FirstClosestObjectNumber_macophages_5,trkA_neurons|Neighbors_SecondClosestObjectNumber_macophages_5,trkA_neurons|Neighbors_PercentTouching_macophages_5,trkA_neurons|Neighbors_FirstClosestDistance_macophages_5,trkA_neurons|Neighbors_FirstClosestDistance_CD86_pos_macrophages_total_5,trkA_neurons|Neighbors_SecondClosestDistance_macophages_5,trkA_neurons|Neighbors_SecondClosestDistance_CD86_pos_macrophages_total_5,trkA_neurons|Location_Center_Y,trkA_neurons|Location_Center_X,trkA_neurons|Location_Center_Z,Masked_neurons|Neighbors_FirstClosestDistance_macophages_5,Masked_neurons|Neighbors_SecondClosestDistance_macophages_5,Masked_neurons|Neighbors_PercentTouching_macophages_5,Masked_neurons|Neighbors_FirstClosestObjectNumber_macophages_5,Masked_neurons|Neighbors_FirstClosestObjectNumber_CD86_pos_macrophages_total_5,Masked_neurons|Neighbors_SecondClosestObjectNumber_macophages_5,Masked_neurons|Neighbors_SecondClosestObjectNumber_CD86_pos_macrophages_total_5,Masked_neurons|Neighbors_AngleBetweenNeighbors_macophages_5,Masked_neurons|Neighbors_AngleBetweenNeighbors_CD86_pos_macrophages_total_5,Masked_neurons|Neighbors_NumberOfNeighbors_macophages_5,Masked_neurons|Neighbors_NumberOfNeighbors_CD86_pos_macrophages_total_5,Masked_neurons|Location_Center_Y,Masked_neurons|Location_Center_X,Masked_neurons|Number_Object_Number,Masked_neurons|Parent_overall_neurons,Experiment|Run_Timestamp,Experiment|Modification_Timestamp,Experiment|CellProfiler_Version,Experiment|Pipeline_Pipeline,CD86_pos_macrophages_total|Parent_macophages,CD86_pos_macrophages_total|Number_Object_Number
+    Representation of Nan/Inf:NaN
+    Add a prefix to file names?:Yes
+    Filename prefix:JK_
+    Overwrite existing files without warning?:No
+    Data to export:trkA_neurons
+    Combine these object measurements with those of the previous object?:No
+    File name:DATA.csv
+    Use the object name for the file name?:Yes
